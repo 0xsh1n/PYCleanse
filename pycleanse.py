@@ -81,11 +81,10 @@ def find_and_extend_obfuscated_data(lines, obfuscate_str, line_number):
     while line_number < len(lines):
         line = lines[line_number].strip()
 
-        # Check if the line is part of the obfuscated data
         if ".replace('\\n','')]))" in obfuscate_str:
             break
 
-        # Skip empty lines or lines starting with a comment
+
         if not line or line.startswith("#"):
             line_number += 1
             continue
@@ -93,7 +92,7 @@ def find_and_extend_obfuscated_data(lines, obfuscate_str, line_number):
         obfuscate_str += lines[line_number]
         line_number += 1
 
-        # Check if deobfuscation is complete
+
         if ".replace('\\n','')]))" in obfuscate_str:
             break
 
@@ -134,15 +133,14 @@ def main():
 
     encrypted_data, encryption_key = list(obfuscate_dict.values())[0], list(obfuscate_dict.keys())[0][1:-1]
 
-    original_filename = input_filename.split('.')[0]  # Extracting the original file name without extension
-    output_filename = f"{original_filename}_deobfuscated.py"  # Combining with the deobfuscated suffix
+    original_filename = input_filename.split('.')[0]
+    output_filename = f"{original_filename}_deobfuscated.py"
 
     with open(output_filename, "w", encoding="utf-8") as output_handle:
         output_handle.write(comment + decrypt_aes_data(encrypted_data, encryption_key))
         print(Colorate.Color(Colors.red, "Your file has been deobfuscated successfully, source code is now in {}!\n".format(output_filename), True))
         return
 
-# ... (other code remains unchanged)
 
 if __name__ == "__main__":
     main()
