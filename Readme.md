@@ -12,6 +12,7 @@
 
  ``` 
  git clone https://github.com/0xsh1n/PYCleanse
+ cd PYCleanse
  python pycleanse.py
  ``` 
 
